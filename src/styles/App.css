@@ -3,6 +3,17 @@ h1 {
     text-align: center;
     }
     
+select {
+    margin: 10px;
+    padding: 10px;
+    display: block;
+    border-radius: 8px;
+} 
+
+label {
+    margin: 10px;
+    padding: 5px;
+}
 
 button{
     color: #27aedb;
@@ -13,4 +24,11 @@ button{
 
 .bg-pink{
 	background-color:pink;
+}
+
+.wrapper {
+    width: 500px;
+    padding: 0 10px;
+    border: 2px solid rgb(233, 229, 229);
+    background-color: rgb(253, 252, 252);
 }

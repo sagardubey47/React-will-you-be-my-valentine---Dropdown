@@ -1,7 +1,7 @@
 import React, { useState,useReducer } from "react";
 import "./../styles/App.css";
-
-
+ 
+ 
 const states = [{
 	name : "Madhya Pradesh",
 	description:"Madhya Pradesh, a large state in central India, retains landmarks from eras throughout Indian history.",
@@ -141,9 +141,66 @@ const states = [{
 function App() 
 {
 	// Do not alter/remove main div
+
+	const [selectState, setSelectState] = useState([states[0]]);
+	const [selectCity, setSelectCity] = useState([selectState[0].city[0]]);
+    const [selectTown, setSelectTown] = useState([selectCity[0].landmarks[0]]);
+	
+	function handleStateChange(e) {
+		setSelectState([states[`${e.target.value}`]]);
+	}
+
+	function handleCityChange(e) {
+		setSelectCity([selectState[0].city[`${e.target.value}`]]);
+	}
+
+	function handleTownChange(e) {
+        setSelectTown([selectCity[0].landmarks[`${e.target.value}`]]);
+	}
+	
+
+    console.log(selectState);
 	return (
 	<div id="main">
-		
+	   <label>States: </label> 
+	   <select id="state" onChange={handleStateChange}> 
+	     {
+			 states.map((state, index) => {
+				 return <option value={index} key={index} > {state.name}</option>
+			 })
+		 }
+	   </select> 
+
+	   <label>Cities: </label> 
+	   <select id="city" onChange={handleCityChange}> 
+	     {
+			 selectState[0].city.map((element, index) => {
+				 return <option value={index} key={index} > {element.name}</option>
+			 })
+		 }
+	   </select> 
+
+	   <label>Towns: </label> 
+	   <select id="landmark" onChange={handleTownChange}> 
+	     {
+			 selectCity[0].landmarks.map((landmark, index) => {
+				 return <option value={index} key={index}> {landmark.name}</option>
+			 })
+		 }
+	   </select> 
+	   <div className="wrapper">
+         <h3 id="state-name">{selectState[0].name}</h3>
+		 <p id="state-description">{selectState[0].description}</p>
+	   </div>
+	    <div className="wrapper">
+         <h3 id="state-name">{selectCity[0].name}</h3>
+		 <p id="state-description">{selectCity[0].description}</p>
+	   </div>
+	    <div className="wrapper">
+         <h3 id="state-name">{selectTown[0].name}</h3>
+		 <p id="state-description">{selectTown[0].description}</p>
+	   </div>
+
 	</div>
 	);
 }
